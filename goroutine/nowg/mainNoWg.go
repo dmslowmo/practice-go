@@ -16,7 +16,7 @@ var msgs = make(chan int, 20)
 func produce1() {
 	for i := 10; i < 20; i++ {
 		msgs <- i
-		time.Sleep(10 * time.Microsecond)
+		time.Sleep(2 * time.Second)
 	}
 	pDone <- "Producer 1 is done"
 }
@@ -24,7 +24,7 @@ func produce1() {
 func produce2() {
 	for i := 20; i < 30; i++ {
 		msgs <- i
-		time.Sleep(10 * time.Microsecond)
+		time.Sleep(2 * time.Second)
 	}
 	pDone <- "Producer 2 is done"
 }
@@ -53,4 +53,5 @@ func main() {
 	fmt.Println("msgs channel now closed")
 	fmt.Println(<-cDone)
 	close(cDone)
+	close(pDone)
 }
